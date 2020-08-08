@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import React, { useState, useRef } from "react";
+import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import { StyleSheet, css } from "aphrodite";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import { login, saveToken } from "./../services/user";
 
 import "./../styles/auth.css";
 
@@ -14,7 +16,7 @@ const formName = "login";
 const inputs = [
   {
     id: "id",
-    name: "id",
+    name: "identifier",
     label: "Username",
     type: "text",
     rules: [
@@ -47,15 +49,29 @@ const inputs = [
 ];
 
 export const LoginPage = () => {
+  const formRef = useRef(null);
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const onFinish = async ({ id, password }) => {
+  const onFinish = async ({ identifier, password }) => {
     setLoading(true);
-    //do some validation shit
-    setLoading(false);
+    try {
+      const {
+        data: { token },
+      } = await login(identifier, password);
+      saveToken(token);
+      setLoading(false);
+      setTimeout(() => {
+        history.push("/home");
+      }, 500);
+    } catch (e) {
+      formRef.current.resetFields(["password"]);
+      notification.error({ message: e });
+      setLoading(false);
+    }
   };
   return (
     <div className="auth-container">
-      <Form name={formName} onFinish={onFinish} className="form">
+      <Form name={formName} ref={formRef} onFinish={onFinish} className="form">
         {inputs.map(({ id, name, input, label, rules, type }) => {
           const { Prefix, placeholder } = input;
           return (

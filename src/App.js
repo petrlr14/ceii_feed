@@ -1,40 +1,61 @@
-import React /*, { useState } */ from "react";
-import { Switch, Route, useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { LoginPage } from "./pages/login";
-import { Layout } from "antd";
-import { StyleSheet, css } from "aphrodite";
-import { LandingPage, LandingHeader } from "./pages/landing";
+import { Layout, notification } from "antd";
+import { LandingPage } from "./pages/landing";
 import { RegisterPage } from "./pages/register";
+import { Feed } from "./pages/feed";
+import { LandingHeader, AuthHeader, FeedHeader } from "./components/headers/headers";
+import { loadUser } from "./services/user";
+import { Profile } from "./pages/profile";
 
 const { Content, Header, Footer } = Layout;
 
 export const App = () => {
   const { location } = useHistory();
-  console.log(location.pathname === "/");
-  // const [logged, setLog] = useState(false);
+  const [user, setUser] = useState({});
+  const [loadUserCb, setLoadUserCb] = useState(0);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { data } = await loadUser();
+        setUser(data);
+      } catch (e) {
+        notification.error({ message: e });
+      }
+    };
+    switch (location.pathname) {
+      case "/":
+      case "/login":
+      case "/signup":
+        break;
+      default: {
+        fetchUser();
+      }
+    }
+    console.log("aver");
+  }, [location.pathname, loadUserCb]);
   return (
-    <Layout className={css(style.layout)}>
+    <Layout className="layout">
       <Header>
         <Switch>
           <Route path="/" exact component={LandingHeader} />
+          <Route path="/login" exact component={AuthHeader} />
+          <Route path="/signup" exact component={AuthHeader} />
           <Route
-            render={(props) => {
-              return (
-                <h1>
-                  <Link to="/" className={css(style.color)}>
-                    CEII Feed
-                  </Link>
-                </h1>
-              );
+            component={(props) => {
+              return <FeedHeader user={user} />;
             }}
           />
         </Switch>
       </Header>
-      <Content className={css(style.content)}>
+      <Content>
         <Switch>
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={RegisterPage} />
-          <Route path="/" component={LandingPage} />
+          <Route path="/" exact component={LandingPage} />
+          <Route path="/home" exact component={Feed} />
+          <Route path="/profile/:id?" exact component={() => <Profile user={user} />} />
         </Switch>
       </Content>
       <Footer>
@@ -45,17 +66,3 @@ export const App = () => {
     </Layout>
   );
 };
-
-const style = StyleSheet.create({
-  layout: {
-    minHeight: "100vh",
-    maxHeight: "100vh",
-  },
-  content: {
-    height: "80vh",
-    minHeight: "80vh",
-  },
-  color: {
-    color: "white",
-  },
-});

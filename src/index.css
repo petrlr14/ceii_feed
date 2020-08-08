@@ -1,2 +1,195 @@
 @import "~antd/dist/antd.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  margin: 0;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.landing-container {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  height: 80vh;
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+.landing-container .cover {
+  width: 90%;
+  height: 90%;
+}
+
+.landing-container .banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-container .banner h1 {
+  font-size: 4em;
+  font-weight: 100;
+}
+
+.landing-container .banner h1:first-child {
+  font-weight: bolder;
+  align-self: flex-start;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 80vh;
+
+  margin-top: 0.5em;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-areas: "profile posts";
+  grid-template-columns: 30% 1fr;
+  min-height: 80vh;
+}
+
+.profile-container > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #eee;
+}
+
+.profile-container > div:first-child img {
+  border-radius: 4px;
+}
+
+.profile-container > div:first-child h1,
+.profile-container > div:first-child h3 {
+  margin: 0;
+}
+
+.profile-container > div:first-child > * {
+  margin: 0.5em 0;
+}
+
+.profile-container > div:nth-child(2) {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.post-page {
+  display: grid;
+  grid-template-areas: "post posts";
+  grid-template-columns: 35% 1fr;
+  min-height: 80vh;
+}
+
+.post-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feed-fixed {
+  height: 80vh;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.feed-container > .post {
+  margin: 0.5em 0;
+}
+
+.post-fallback {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-card-header > * {
+  margin: 0 0.4em;
+}
+
+.image {
+  width: 440px;
+  height: 440px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-clip: border-box;
+  background-position: center;
+  border-bottom: 2px solid #eee;
+}
+
+.like {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.landing-header {
+  justify-content: flex-end;
+}
+
+.landing-header button {
+  color: white;
+}
+
+.auth-header {
+  justify-content: flex-start;
+}
+
+.feed-header {
+  justify-content: space-between;
+}
+
+button.branding {
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  color: white;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.info > * {
+  margin: 0 0.3em;
+}
+
+.info h2 {
+  color: white;
+}
