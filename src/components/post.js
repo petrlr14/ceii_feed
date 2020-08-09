@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Avatar, Button, notification } from "antd";
-import { HeartTwoTone, BookOutlined, FullscreenOutlined } from "@ant-design/icons";
+import { HeartTwoTone, BookOutlined } from "@ant-design/icons";
 import { like, savePost } from "./../services/post";
 import Strings from "../utils/strings";
 import { Link } from "react-router-dom";

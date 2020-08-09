@@ -4,7 +4,7 @@ export const LandingPage = () => {
   return (
     <div className="landing-container">
       <div>
-        <img className="cover" src={"/img/man.jpg"} />
+        <img className="cover" src={"/img/man.jpg"} alt="man with a phone" />
       </div>
       <div className="banner">
         <h1>CEII Feed</h1>

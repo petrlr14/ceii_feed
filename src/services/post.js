@@ -1,5 +1,3 @@
-import Strings from "../utils/strings";
-
 const { APIInstance, AUTHORIZATION } = require("../config/axios");
 
 export const loadPost = async (page = 0, limit = 100000) => {

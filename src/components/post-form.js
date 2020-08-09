@@ -55,7 +55,7 @@ export const PostForm = ({ fetchPost }) => {
   const formRef = useRef(null);
   const onFinish = async (data) => {
     try {
-      const response = await createPost(data);
+      await createPost(data);
       fetchPost();
       formRef.current.resetFields();
       notification.success({ message: strings.POST.CREATED });

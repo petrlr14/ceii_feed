@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import queryString from "query-string";
 import { loadPost } from "../services/post";
 import { Posts } from "./../components/posts";
 import { PostForm } from "../components/post-form";

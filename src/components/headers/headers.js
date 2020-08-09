@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { Avatar } from "antd";
@@ -27,8 +27,6 @@ export const AuthHeader = () => {
 };
 
 export const FeedHeader = ({ user }) => {
-  const { username, photo } = user;
-  console.log(user);
   return (
     <div className="header feed-header">
       <div>

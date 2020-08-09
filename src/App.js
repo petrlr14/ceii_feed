@@ -14,7 +14,6 @@ const { Content, Header, Footer } = Layout;
 export const App = () => {
   const { location } = useHistory();
   const [user, setUser] = useState({});
-  const [loadUserCb, setLoadUserCb] = useState(0);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -34,7 +33,7 @@ export const App = () => {
       }
     }
     console.log("aver");
-  }, [location.pathname, loadUserCb]);
+  }, [location.pathname]);
   return (
     <Layout className="layout">
       <Header>
